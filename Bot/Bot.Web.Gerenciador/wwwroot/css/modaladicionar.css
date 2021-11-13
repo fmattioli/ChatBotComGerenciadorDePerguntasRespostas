@@ -1,0 +1,15 @@
+﻿.modal {
+    max-height: 18%;
+}
+
+.modal-form-row {
+    margin-bottom: 0px;
+}
+
+#modalMensagem {
+    max-height: 38%;
+}
+#modalResposta {
+    max-height: 38%;
+}
+

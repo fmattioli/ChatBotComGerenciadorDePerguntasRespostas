@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Bot.Aplicacao.ViewModels.UsuarioViewModel>
+
+<title>Cadastrar usuário</title>
+<div class="section"></div>
+<div class="section"></div>
+<div class="section"></div>
+
+<div class="row">
+    <form class="col s12" id="formUsuario">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="nome" type="text" class="validate" required>
+                <label for="nome">Nome</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="email" type="email" class="validate" required>
+                <label for="email">Email</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="senha" type="password" class="validate">
+                <label for="senha">Senha</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="confirmarsenha" type="password">
+                <label id="confirmarsenha" for="confirmarsenha" data-error="Password not match" data-success="Password Match">Confirmar senha</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <a class="btn waves-effect waves-light black" onclick="inserirUsuario();">
+                    Inserir usuário
+                    <i class="material-icons right">send</i>
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div>
+    <partial name="_ModalExcluir" />
+</div>
+
+
+<div class="row">
+    <div class='table-responsive' id="usuariosGrid">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr id="@item.Nome">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                <a class="btn-floating btn-large waves-effect waves-light black" onclick="excluirUsuario('@item.Id');"><i class="material-icons">delete</i></a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/Usuarios.js"></script>

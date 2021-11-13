@@ -1,0 +1,554 @@
+/*
+
+drop table  [Bot].Usuarios
+drop table  [Bot].[RespostasCard]
+drop table	[Bot].CardsRetorno
+drop table  [Bot].InicioConversa
+drop table	[Bot].Cards
+drop table  [Bot].[Respostas]
+drop table	[Bot].[Perguntas]
+drop table	[Bot].[Intencoes]
+drop table	[Bot].[Especialidades]
+drop table	[Bot].[Mensagens]
+
+
+CREATE TABLE [Bot].Usuarios
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY,
+	[Nome] Varchar(100) NOT NULL,
+	[Email] Varchar(100) NOT NULL,
+	[Senha] Varchar(200) NOT NULL,
+	[Ativo] BIT NOT NULL DEFAULT 1,
+	CONSTRAINT UQ_Email UNIQUE ([Email])
+)
+
+
+	CREATE TABLE [Bot].[Especialidades]
+	(
+		[Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY,
+		[Nome] VARCHAR(200) NOT NULL,
+		[Descricao] VARCHAR(200) NOT NULL,
+		[Ativo] BIT NOT NULL DEFAULT 1,
+		CONSTRAINT UQ_Nome UNIQUE ([Nome])
+	)
+
+
+	CREATE TABLE [Bot].[Cards]
+	(
+		[Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY,
+		[ConteudoJson] NVARCHAR(MAX) NOT NULL,
+		[NomeCard] VARCHAR(250) NOT NULL, 
+		[ExibirInicio] BIT NOT NULL, 
+		[Relevancia] SMALLINT NOT NULL 
+		CONSTRAINT UQ_Relevancia UNIQUE ([Relevancia])
+	)
+
+
+	CREATE TABLE [Bot].InicioConversa
+	(
+		[Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY,
+		[Mensagem] VARCHAR(MAX) NOT NULL,
+		[Relevancia] SMALLINT NOT NULL,
+		[CardId]  UNIQUEIDENTIFIER  NULL,
+		[EspecialidadeId] UNIQUEIDENTIFIER NOT NULL,
+		[Ativo] BIT NOT NULL DEFAULT 1,
+		FOREIGN KEY ([EspecialidadeId]) REFERENCES [Bot].[Especialidades]([Id]),
+		FOREIGN KEY ([CardId]) REFERENCES [Bot].[Cards]([Id]),
+		CONSTRAINT UQ_RelevanciaInicioConversa UNIQUE ([Relevancia])
+	)
+
+	CREATE TABLE [Bot].CardsRetorno
+	(
+		[Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY,
+		[CardId] UNIQUEIDENTIFIER NOT NULL,
+		[IntencaoCard] VARCHAR(200),
+		FOREIGN KEY ([CardId]) REFERENCES [Bot].[Cards]([Id]),
+		CONSTRAINT UQ_IntencaoCard UNIQUE ([IntencaoCard])
+	)
+
+
+	CREATE TABLE [Bot].[Intencoes]
+	(
+		[Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY,
+		[IntencaoTexto] VARCHAR(200) NOT NULL,
+		[EspecialidadeId] UNIQUEIDENTIFIER NOT NULL,
+		[Ativo] BIT NOT NULL DEFAULT 1
+		FOREIGN KEY ([EspecialidadeId]) REFERENCES [Bot].[Especialidades]([Id])
+	)
+
+	CREATE TABLE [Bot].[Perguntas]
+	(
+		[Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY,
+		[TextoPergunta] VARCHAR(MAX) NOT NULL,
+		[IntencaoId] UNIQUEIDENTIFIER NOT NULL,
+		[Ativo] BIT NOT NULL DEFAULT 1
+		FOREIGN KEY ([IntencaoId]) REFERENCES [Bot].[Intencoes]([Id]),
+
+	)
+
+	CREATE TABLE [Bot].[Respostas]
+	(
+		[Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY,
+		[RespostaTexto] VARCHAR(MAX) NOT NULL,
+		[PerguntaId] UNIQUEIDENTIFIER NOT NULL,
+		[Ativo] BIT NOT NULL DEFAULT 1,
+		FOREIGN KEY ([PerguntaId]) REFERENCES [Bot].[Perguntas]([Id])
+	)
+
+
+	CREATE TABLE [Bot].[RespostasCard]
+	(
+		[Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY,
+		[Resposta] VARCHAR(MAX) NOT NULL,
+		[CardsRetornoId] UNIQUEIDENTIFIER NOT NULL,
+		[Ativo] BIT NOT NULL DEFAULT 1
+		FOREIGN KEY ([CardsRetornoId]) REFERENCES [Bot].[CardsRetorno]([Id])
+	)
+
+	CREATE TABLE [Bot].[Mensagens]
+	(
+		[Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY,
+		[MensagemRecebida] NVARCHAR(MAX) NOT NULL
+	)
+
+
+*/
+
+IF NOT EXISTS (SELECT * FROM Bot.InicioConversa)
+BEGIN
+
+		INSERT INTO Bot.Usuarios
+		(
+			Nome,
+			Email,
+			Senha
+		)
+		VALUES
+		(
+			'Felipe',
+			'felipe@felipe.com',
+			'E3nXmixxQ7wFqbC8PPzArA==' --abc
+		)
+		INSERT INTO Bot.Cards
+		(
+			[ConteudoJson],
+			[NomeCard],
+			[ExibirInicio],
+			[Relevancia]
+		)
+		VALUES
+		(
+			'{
+		  "type": "AdaptiveCard",
+		  "body": [
+			{
+			  "type": "TextBlock",
+			  "wrap": true,
+			  "spacing": "None",
+			  "fontType": "Default",
+			  "horizontalAlignment": "Center",
+			  "height": "stretch",
+			  "color": "Accent",
+			  "separator": true,
+			  "size": "Medium",
+			  "isSubtle": true,
+			  "text": "Certidões"
+			},
+			{
+			  "type": "Container",
+			  "items": [
+				{
+				  "type": "ActionSet",
+				  "actions": [
+					{
+					  "type": "Action.Submit",
+					  "title": "Como solicitar uma certidão?",
+					  "style": "positive",
+					  "data": {
+						"Intencao": "SolicitarCertidao"
+					  },
+					  "associatedInputs": "auto"
+					}
+				  ]
+				}
+			  ]
+			},
+			{
+			  "type": "Container",
+			  "items": [
+				{
+				  "type": "ActionSet",
+				  "actions": [
+					{
+					  "type": "Action.Submit",
+					  "title": "Qual o valor de um pedido certidão?",
+					  "data": {
+						"Intencao": "ValorPedidoCertidao"
+					  },
+					  "style": "positive"
+					}
+				  ]
+				},
+				{
+				  "type": "Container",
+				  "items": [
+					{
+					  "type": "ActionSet",
+					  "actions": [
+						{
+						  "type": "Action.OpenUrl",
+						  "title": "Visualizar andamentos",
+						  "style": "positive",
+						  "url": "https://4ricampinas.com.br/Home/Servico?Identificador=23",
+						  "iconUrl": "https://admin.4ricampinas.com.br/Imagens/logo-marca.png"
+						}
+					  ]
+					}
+				  ]
+				}
+			  ]
+			}
+		  ],
+		  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+		  "version": "1.3"
+		}',
+		'cardCertidoes',
+		1,
+		1
+		)
+
+		INSERT INTO Bot.Cards
+		(
+			[ConteudoJson],
+			[NomeCard],
+			[ExibirInicio],
+			[Relevancia]
+		)
+		VALUES
+		(
+			'{
+			  "type": "AdaptiveCard",
+			  "body": [
+			    {
+			      "type": "TextBlock",
+			      "wrap": true,
+			      "spacing": "None",
+			      "fontType": "Default",
+			      "horizontalAlignment": "Center",
+			      "height": "stretch",
+			      "color": "Accent",
+			      "separator": true,
+			      "size": "Medium",
+			      "isSubtle": true,
+			      "text": "Títulos"
+			    },
+			    {
+			      "type": "Container",
+			      "items": [
+			        {
+			          "type": "ActionSet",
+			          "actions": [
+			            {
+			              "type": "Action.ShowCard",
+			              "title": "Como funciona o registro?",
+			              "card": {
+			                "type": "AdaptiveCard",
+			                "body": [
+			                  {
+			                    "type": "RichTextBlock",
+			                    "inlines": [
+			                      {
+			                        "type": "TextRun",
+			                        "text": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using , making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+			                      }
+			                    ]
+			                  }
+			                ]
+			              },
+			              "style": "positive"
+			            }
+			          ]
+			        }
+			      ]
+			    },
+			    {
+			      "type": "Container",
+			      "items": [
+			        {
+			          "type": "ActionSet",
+			          "actions": [
+			            {
+			              "type": "Action.ShowCard",
+			              "card": {
+			                "type": "AdaptiveCard",
+			                "body": [
+			                  {
+			                    "type": "RichTextBlock",
+			                    "inlines": [
+			                      {
+			                        "type": "TextRun",
+			                        "text": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+			                      }
+			                    ]
+			                  }
+			                ]
+			              },
+			              "title": "Quanto custa o registro?",
+			              "style": "positive"
+			            }
+			          ]
+			        },
+			        {
+			          "type": "Container",
+			          "items": [
+			            {
+			              "type": "ActionSet",
+			              "actions": [
+			                {
+			                  "type": "Action.OpenUrl",
+			                  "title": "Visualizar andamentos",
+			                  "style": "positive",
+			                  "url": "https://4ricampinas.com.br/Home/Servico?Identificador=23"
+			                }
+			              ]
+			            }
+			          ]
+			        }
+			      ]
+			    }
+			  ],
+			  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+			  "version": "1.3"
+			}',
+		'cardTitulos',
+		1,
+		2
+		)
+	
+		INSERT INTO Bot.Cards
+		(
+			[ConteudoJson],
+			[NomeCard],
+			[ExibirInicio],
+			[Relevancia]
+		)
+		VALUES
+		(
+			'{
+			  "type": "AdaptiveCard",
+			  "body": [
+			    {
+			      "type": "TextBlock",
+			      "wrap": true,
+			      "spacing": "None",
+			      "fontType": "Default",
+			      "horizontalAlignment": "Center",
+			      "height": "stretch",
+			      "color": "Accent",
+			      "separator": true,
+			      "size": "Medium",
+			      "isSubtle": true,
+			      "text": "Informações gerais"
+			    },
+			    {
+			      "type": "Container",
+			      "items": [
+			        {
+			          "type": "ActionSet",
+			          "actions": [
+			            {
+			              "type": "Action.OpenUrl",
+			              "title": "Como chegar ao cartório?",
+			              "url": "https://www.google.com/maps/place/Parque+Empresarial+Campinas/@-22.839594,-47.03384,15z/data=!4m5!3m4!1s0x0:0x7d7aadebd126c94d!8m2!3d-22.839636!4d-47.0338455?hl=pt-PT",
+			              "style": "positive"
+			            }
+			          ]
+			        }
+			      ]
+			    },
+			    {
+			      "type": "Container",
+			      "items": [
+			        {
+			          "type": "Container",
+			          "items": [
+			            {
+			              "type": "ActionSet",
+			              "actions": [
+			                {
+			                  "type": "Action.Submit",
+			                  "title": "Requerimentos",
+			                  "style": "positive"
+			                }
+			              ]
+			            }
+			          ]
+			        },
+			        {
+			          "type": "ActionSet",
+			          "actions": [
+			            {
+			              "type": "Action.OpenUrl",
+			              "title": "Contato",
+			              "url": "https://4ricampinas.com.br/Home/FaleConosco",
+			              "style": "positive"
+			            }
+			          ]
+			        },
+			        {
+			          "type": "Container",
+			          "items": [
+			            {
+			              "type": "ActionSet",
+			              "actions": [
+			                {
+			                  "type": "Action.OpenUrl",
+			                  "title": "Links úteis",
+			                  "style": "positive",
+			                  "url": "https://4ricampinas.com.br/Home/Conteudo?1BE7D182-2386-4502-8671-A844BEB92FA5=3@25E869D3-ABA6-4D02-9E70-FC55B6144BEE"
+			                }
+			              ]
+			            }
+			          ]
+			        }
+			      ]
+			    }
+			  ],
+			  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+			  "version": "1.3"
+			}
+			',
+		'cardInfo',
+		1,
+		3
+		)
+
+		INSERT INTO Bot.CardsRetorno
+		(
+			CardId,
+			IntencaoCard
+		)
+		VALUES
+		(
+			(SELECT Id FROM Bot.Cards WHERE NomeCard = 'cardCertidoes'),
+			'SolicitarCertidao'
+		)
+
+		INSERT INTO Bot.CardsRetorno
+		(
+			CardId,
+			IntencaoCard
+		)
+		VALUES
+		(
+			(SELECT Id FROM Bot.Cards WHERE NomeCard = 'cardCertidoes'),
+			'ValorPedidoCertidao'
+		)
+		
+		INSERT INTO [Bot].[RespostasCard]
+		(
+			Resposta,
+			CardsRetornoId
+		)
+		VALUES
+		(
+			'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+			(SELECT Id FROM Bot.CardsRetorno WHERE IntencaoCard = 'ValorPedidoCertidao')
+		)
+
+		INSERT INTO Bot.Especialidades
+		(
+			Nome,
+			Descricao
+		)
+		VALUES
+		(
+			'Futebol',
+			'Bot que responde perguntas sobre futebol'
+		)
+
+		INSERT INTO [Bot].InicioConversa
+		(
+			[Mensagem],
+			[Relevancia],
+			[EspecialidadeId],
+			[CardId]
+		)
+		VALUES
+		(
+			'Seja bem vindo, sou um Bot que responde perguntas sobre futebol',
+			1,
+			(Select Top 1 Id from Bot.Especialidades),
+			NULL
+		)
+
+		INSERT INTO Bot.Intencoes
+		(
+			IntencaoTexto,
+			EspecialidadeId
+		)
+		VALUES
+		(
+			'None',
+			(SELECT TOP 1 Id FROM Bot.Especialidades)
+		)
+
+		INSERT INTO Bot.Intencoes
+		(
+			IntencaoTexto,
+			EspecialidadeId
+		)
+		VALUES
+		(
+			'Mundial_do_Palmeiras',
+			(SELECT TOP 1 Id FROM Bot.Especialidades)
+		)
+
+		
+		INSERT INTO Bot.[Perguntas]
+		(
+			[TextoPergunta],
+			[IntencaoId]
+		)
+		VALUES
+		(
+			'Mensagem não compreendida (Padrão para quando o bot não entender o que foi escrito)',
+			(SELECT TOP 1 Id FROM Bot.Intencoes WHERE Bot.Intencoes.IntencaoTexto = 'None')
+		)
+
+		
+		INSERT INTO Bot.[Perguntas]
+		(
+			[TextoPergunta],
+			[IntencaoId]
+		)
+		VALUES
+		(
+			'O palmeiras tem mundial?',
+			(SELECT TOP 1 Id FROM Bot.Intencoes WHERE Bot.Intencoes.IntencaoTexto = 'Mundial_do_Palmeiras')
+		)
+
+		INSERT INTO Bot.[Respostas]
+		(
+			[RespostaTexto],
+			[PerguntaId]
+		)
+		VALUES
+		(
+			'Não meu amigo, o Palmeiras não tem mundial',
+			(SELECT TOP 1 Id FROM Bot.[Perguntas]  WHERE Bot.Perguntas.TextoPergunta = 'O palmeiras tem mundial?')
+		)
+
+		INSERT INTO Bot.[Respostas]
+		(
+			[RespostaTexto],
+			[PerguntaId]
+		)
+		VALUES
+		(
+			'Infelizmente não entendi o que você disse...',
+			(SELECT TOP 1 Id FROM Bot.[Perguntas]  WHERE Bot.Perguntas.TextoPergunta = 'Mensagem não compreendida (Padrão para quando o bot não entender o que foi escrito)')
+		)
+
+END
+

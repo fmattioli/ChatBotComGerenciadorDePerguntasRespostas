@@ -1,0 +1,12 @@
+C:\Bot\BotComControleDePerguntasDinamico\Bot\Bot.Dominio\bin\Release\net5.0\Bot.Dominio.deps.json
+C:\Bot\BotComControleDePerguntasDinamico\Bot\Bot.Dominio\bin\Release\net5.0\Bot.Dominio.dll
+C:\Bot\BotComControleDePerguntasDinamico\Bot\Bot.Dominio\bin\Release\net5.0\ref\Bot.Dominio.dll
+C:\Bot\BotComControleDePerguntasDinamico\Bot\Bot.Dominio\bin\Release\net5.0\Bot.Dominio.pdb
+C:\Bot\BotComControleDePerguntasDinamico\Bot\Bot.Dominio\obj\Release\net5.0\Bot.Dominio.csproj.AssemblyReference.cache
+C:\Bot\BotComControleDePerguntasDinamico\Bot\Bot.Dominio\obj\Release\net5.0\Bot.Dominio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Bot\BotComControleDePerguntasDinamico\Bot\Bot.Dominio\obj\Release\net5.0\Bot.Dominio.AssemblyInfoInputs.cache
+C:\Bot\BotComControleDePerguntasDinamico\Bot\Bot.Dominio\obj\Release\net5.0\Bot.Dominio.AssemblyInfo.cs
+C:\Bot\BotComControleDePerguntasDinamico\Bot\Bot.Dominio\obj\Release\net5.0\Bot.Dominio.csproj.CoreCompileInputs.cache
+C:\Bot\BotComControleDePerguntasDinamico\Bot\Bot.Dominio\obj\Release\net5.0\Bot.Dominio.dll
+C:\Bot\BotComControleDePerguntasDinamico\Bot\Bot.Dominio\obj\Release\net5.0\ref\Bot.Dominio.dll
+C:\Bot\BotComControleDePerguntasDinamico\Bot\Bot.Dominio\obj\Release\net5.0\Bot.Dominio.pdb

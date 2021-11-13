@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/lib/materialize/css/materialize.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/modaladicionar.css" rel="stylesheet" />
+
+</head>
+<body>
+    <header>
+        <ul id="conversacao" class="dropdown-content">
+            <li><a class="black-text" asp-action="Home" asp-controller="Intencao">Intenções</a></li>
+        </ul>
+
+        <ul id="cadastros" class="dropdown-content">
+            <li><a class="black-text" asp-action="Home" asp-controller="Especialidade">Especialidades</a></li>
+            <li><a class="black-text" asp-action="Cadastrar" asp-controller="Usuarios">Usuários</a></li>
+        </ul>
+
+        <ul id="conversacao_mobile" class="dropdown-content">
+            <li><a class="black-text" asp-action="Home" asp-controller="Intencao">Intenções</a></li>
+        </ul>
+
+        <ul id="cadastros_mobile" class="dropdown-content">
+            <li><a class="black-text" asp-action="Home" asp-controller="Especialidade">Especialidades</a></li>
+            <li><a class="black-text" asp-action="Cadastrar" asp-controller="Usuarios">Usuários</a></li>
+        </ul>
+
+        <nav class="" id="navMenu">
+            <div class="nav-wrapper">
+                <a class="brand-logo">Gerenciador</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a asp-action="Home" asp-controller="Home">Início</a></li>
+                    <li><a class="dropdown-trigger" href="#!" data-target="conversacao">Conversação<i class="material-icons right">arrow_drop_down</i></a></li>
+                    <li><a class="dropdown-trigger" href="#!" data-target="cadastros">Cadastros<i class="material-icons right">arrow_drop_down</i></a></li>
+                    <li><a onclick="window.location.href = '/Usuarios/Login'">Sair</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <ul class="sidenav" id="mobile-demo">
+            <li><a class="dropdown-trigger" href="#!" data-target="conversacao_mobile">Conversação<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a class="dropdown-trigger" href="#!" data-target="cadastros_mobile">Cadastros<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a onclick="window.location.href = '/Usuarios/Login'">Sair</a></li>
+        </ul>
+
+
+
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="page-footer">
+        <div class="container">
+            Política de privacidade © 2021 - Todos os direitos reservados
+            <a class="grey-text text-lighten-4 right" href="https://spcm.com.br/">Felipe Mattioli</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/materialize/js/materialize.js"></script>
+    <script src="~/js/ConfirmarExclusao.js"></script>
+    <script src="~/js/InicializarTooltips.js"></script>
+    <script src="~/js/InicializarSideNav.js"></script>
+    <script src="~/js/InicializarDatepicker.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

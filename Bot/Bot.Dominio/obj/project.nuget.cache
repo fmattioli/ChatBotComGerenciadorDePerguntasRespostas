@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "zOAvuHXOZAEc03TckQ5Qs/R2UhC5UXTwbxxXCkPcN9qqHjT+RG7EN3fCWbOL3Mu2NgMvVPTijhECeMQ/vFEyag==",
+  "success": true,
+  "projectFilePath": "C:\\Bot\\BotComControleDePerguntasDinamico\\Bot\\Bot.Dominio\\Bot.Dominio.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\felipe.santos\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\felipe.santos\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\felipe.santos\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Bot.Aplicacao.ViewModels.InicioConversaViewModel>
+
+<title>Mensagem Início</title>
+<div class="section"></div>
+<div class="section"></div>
+<link href="~/css/modaladicionar.css" rel="stylesheet" />
+
+
+@{
+    bool modelValido = @Model.Count() >= 1;
+}
+
+<div class="row">
+    <div class="col s6 m6">
+        <a class="btn-floating btn-large waves-effect waves-light black" onclick="openModal('@ViewBag.EspecialidadeId', '@ViewBag.Especialidade');"><i class="material-icons left">add</i>button</a>
+    </div>
+    <div class="col s6 m6">
+        <a class="btn-floating btn-large waves-effect waves-light black" asp-action="Home" asp-controller="Especialidade"><i class="material-icons left">arrow_back</i>button</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col s6 m7">
+        @if (modelValido)
+        {
+            int contador = 0;
+            @foreach (var mensagem in Model)
+            {
+                contador++;
+                <div class="card horizontal">
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <p>Mensagem - @contador</p>
+                        </div>
+                        <div class="card-action">
+                            <strong>@mensagem.Mensagem</strong>
+                            <a class="secondary-content btn-floating btn-small waves-effect waves-light black" onclick="desativarmensagem('@mensagem.Id')"><i class="material-icons">delete</i><span class="badge"></span></a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="card horizontal">
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <p>Cadastre as respostas conforme sua necessidade.</p>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+<div class="modal modal-fixed-footer" id="modalMensagem">
+    <div class="modal-content">
+        <h6><strong>Adicionar uma mensagem</strong></h6>
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="mensagem" class="materialize-textarea"></textarea>
+                    <label for="mensagem">Mensagem</label>
+                </div>
+                <div class="input-field col s12">
+                    <input Placeholder="Especialidade" id="especialidade" type="text" class="validate" disabled>
+                    <label for="intencao">Especialidade</label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn-small black darken-4 modal-close"><i class="material-icons left">cancel</i>Cancelar</button>
+        <button type="button" class="btn-small black darken-4" id="btnAdicionarMensagem">Adicionar<i class="material-icons left">add</i></button>
+    </div>
+</div>
+
+<script src="~/js/mensagem.js"></script>

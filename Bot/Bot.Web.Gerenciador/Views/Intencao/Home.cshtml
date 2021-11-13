@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Bot.Aplicacao.ViewModels.EspecialidadeViewModel>
+
+
+<title>Intenções - Especialidades</title>
+
+<div class="section"></div>
+<div class="section"></div>
+<div class="section"></div>
+
+<div class="row">
+    <div class="col 12">
+        <div class="row">
+            @if (Model is not null)
+            {
+                foreach (var item in Model)
+                {
+                    <div class="card col s6">
+                        <div class="card-content">
+                            <span class="card-title"><strong>@item.Nome</strong></span>
+                            <p>
+                                @item.Descricao -
+                                Clique em intenções para verificar todas as intenções relacionadas a esta especialidade.
+                            </p>
+                        </div>
+                        <div class="card-action">
+                            <a class="black-text" asp-action="Intencoes" asp-controller="Intencao" asp-route-id="@item.Id">Ver intenções relacionadas a especialidade</a>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <h4>Não existem especialidades cadastradas, configure conforme necessidade.</h4>
+            }
+
+        </div>
+        <div class="row">
+
+        </div>
+    </div>
+</div>
+
+<div>
+    <partial name="_ModalAdicionarIntencao" />
+</div>
+
+
+<script src="~/js/Intencoes.js"></script>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="UTF-8">
+    <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+	<link href="botchat.css" rel="stylesheet" />
+	<title> 4º RI Campinas </title>
+	
+</head>
+<body>
+      <style>
+		  
+		  #webchat .webchat--css-xrmlu-j7qwjs{
+            width: 100% !important;
+            display: none !important;
+         }
+		  
+         .ac-actionSet .ac-pushButton{
+            //background-color: rgb(1 32 56) !important;
+         }
+      </style>
+  <div style="height: 80%; width: 80%; margin-top:5%; margin-left:10%" id="webchat" role="main"></div>
+	
+  <script>
+     
+     // Set  the CSS rules.
+     const styleSet = window.WebChat.createStyleSet({
+         bubbleBackground: 'rgba(255, 99, 71, 0)',
+         bubbleFromUserBackground: 'rgba(0, 255, 0, 1)',
+         rootHeight: '80%',
+         rootWidth: '80%',
+         backgroundColor: 'white'
+		 
+		 
+      });
+	  var cartorio = {"Especialidade": 1, "Nome":"4RICampinas", "Site": "https://4ricampinas.com.br/"} 
+	  var json = JSON.stringify(cartorio);
+	  const store = window.WebChat.createStore({}, ({ dispatch }) => next => action => {
+         if (action.type === 'DIRECT_LINE/CONNECT_FULFILLED') {
+           dispatch({
+             type: 'WEB_CHAT/SEND_EVENT',
+             payload: {
+               name: 'Cartorio',
+               value: json
+             }
+           });
+         }
+         return next(action);
+       });
+
+      // After generated, you can modify the CSS rules.
+      // Change font family and weight. 
+      styleSet.textContent = {
+         ...styleSet.textContent
+      };
+
+    // Set the avatar options. 
+     const avatarOptions = {
+        botAvatarImage: 'https://image.freepik.com/vetores-gratis/robo-icone-de-bot-de-suporte-em-branco_116137-2172.jpg',
+         botAvatarInitials: '4º RI',
+         userAvatarImage: 'https://as1.ftcdn.net/v2/jpg/01/27/80/10/500_F_127801056_RI7S31G7GWmx7AFWQHenno91gHNltuBA.jpg',
+   		 userAvatarInitials: 'Você',
+		 hideSendBox: false,
+		 hideUploadButton: true
+         };
+
+    window.WebChat.renderWebChat({
+      directLine: window.WebChat.createDirectLine({
+          token: '1hOWZoa1Nq4.li8kag2JULSOJQSIpyd5K7b_rWFwG4Y9tWnoqAQTciM'}),
+		store,
+      styleSet,
+      styleOptions: avatarOptions
+    }, document.getElementById('webchat'));
+    
+  </script>
+</body>
+
+

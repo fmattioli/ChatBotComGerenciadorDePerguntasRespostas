@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Bot.Aplicacao.ViewModels.EspecialidadeViewModel>
+<title>Cadastrar Especialidades</title>
+<div class="section"></div>
+<div class="section"></div>
+<div class="section"></div>
+<div class="section"></div>
+
+<div class="col s12">
+    <form id="especialidadeForm">
+        <div class="row">
+            <div class='input-field col s5'>
+                <input id="especialidade" type="text" class="validate" required>
+                <label for="especialidade">Especialidade</label>
+                <span class="helper-text" data-error="Informe uma especialidade!" data-success="Tudo certo!"></span>
+            </div>
+            <div class='input-field col s5'>
+                <input id="descricao" type="text" class="validate" required>
+                <label for="descricao">Descrição</label>
+                <span class="helper-text" data-error="Informe uma descrição!" data-success="Tudo certo!"></span>
+            </div>
+            <a class="btn-floating btn-large waves-effect waves-light black" onclick="adicionarEspecialidade()"><i class="material-icons">add</i></a>
+        </div>
+    </form>
+    <blockquote>
+        Não se esqueça de configurar as mensagens inicias de cada especialidade.
+    </blockquote>
+    <div class="row">
+        <div class='table-responsive' id="especialidadesGrid">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Especialidade</th>
+                        <th>Descrição</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="@item.Nome">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Descricao)
+                            </td>
+                            <td>
+                                <a class="btn-floating btn-medium waves-light black" asp-action="Mensagens" asp-controller="MensagemInicio" asp-route-id="@item.Id"><i class="material-icons">chat</i></a>
+                            </td>
+
+                            <td>
+                                <a class="btn-floating btn-medium waves-effect waves-light black" onclick="excluirEspecialidade('@item.Id');"><i class="material-icons">delete</i></a>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div>
+        <partial name="_ModalExcluir" />
+    </div>
+</div>
+
+<div class="section"></div>
+<div class="section"></div>
+<div class="section"></div>
+<div class="section"></div>
+
+<script src="~/js/Especialidade.js"></script>

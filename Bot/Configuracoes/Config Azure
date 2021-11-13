@@ -1,0 +1,18 @@
+REFERÊNCIA: --https://docs.microsoft.com/pt-br/azure/bot-service/bot-builder-deploy-az-cli?view=azure-bot-service-4.0&tabs=csharp#deploy-via-arm-template-with-existing-resource-group
+PASSOS PARA PUBLICAR O BOT NO AZURE:
+1)NECESSÁRIO BAIXAR O AZURE CLI.
+2)AUTENTICAR VIA CLI.
+3)SETAR SUBSCRIPTION: az account set --subscription "bc0a90f3-a0ac-407b-8641-a09ca171caef"     
+4)GERAR APP ID E SALVAR SENHA:   az ad app create --display-name "WebSitesBot" --password "b7Bdw7cpQYbMIya8Fpgo1Wx7QD" --available-to-other-tenants    
+5)ARMAZENAR APP ID: 81901fc2-9c62-4741-8ef1-b9f6fef95a58(GERADO A PARTIR DO COMANDO ACIMA) E PASSWORD: b7Bdw7cpQYbMIya8Fpgo1Wx7QD (MESMA SENHA ACIMA)     
+6)CRIAR GRUPO DE RECURSO: 
+az deployment sub create --template-file "C:\MAPTFS\WebSites-v9.5\WebSites\Bot.Web\DeploymentTemplates\template-with-new-rg.json" --location "westus" --parameters appId="81901fc2-9c62-4741-8ef1-b9f6fef95a58" appSecret="b7Bdw7cpQYbMIya8Fpgo1Wx7QD" botId="WebSitesBot" botSku=F0 newAppServicePlanName="WebSitesBotAppServicePlain" newWebAppName="WebSitesBotAppService" groupName="WebSitesBot" groupLocation="westus" newAppServicePlanLocation="westus" --name "WebSitesBotName"
+7)ATUALIZAR CÓDIGO COM O APP ID E SENHA GERADAS NOS PASSOS ANTERIORES
+8)GERAR ARQUIVO DE DEPLOY (INFORMAR O CAMINHO DA APLICAÇAO): 
+az bot prepare-deploy --lang Csharp --code-dir "C:\MAPTFS\WebSites-v9.5\WebSites\Bot.Web" --proj-file-path "Bot.Web.csproj"
+9)ZIPAR PASTA DO PROJETO EX: C:\EquipeWeb\Web.Bot ZIPAR O NIVEL ANTERIOR DE ONDE ESTÁ O CSPROJ
+10)SUBIR CÓDIGO NO AZURE (SE ATENTAR PRA USAR O APP SERVICE): 
+az webapp deployment source config-zip --resource-group "WebSitesBot" --name "WebSitesBotAppService" --src "C:\MAPTFS\WebSites-v9.5\WebSites\Bot.Web.zip"
+11)IR AO AZURE E SETAR Enable Streaming Endpoint EM CONFIGURACOES.
+12)BAIXAR PUBLISH SETTINGS E PUBLICAR O BOT VIA VISUAL STUDIO.
+PRONTO!!!!!
