@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 
 namespace Bot.Web.Dialogs
 {
+    
     public class CentralizadorDialog : ComponentDialog
     {
         protected readonly ILogger Logger;
@@ -28,6 +29,7 @@ namespace Bot.Web.Dialogs
             : base(nameof(CentralizadorDialog))
         {
             Logger = logger;
+
             AddDialog(new TextPrompt(nameof(TextPrompt)));
             AddDialog(dialogo);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
