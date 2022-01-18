@@ -95,7 +95,6 @@ C:\Bot\BotComControleDePerguntasDinamico\Bot\Bot.Web.Gerenciador\obj\Debug\net5.
 C:\Bot\BotComControleDePerguntasDinamico\Bot\Bot.Web.Gerenciador\obj\Debug\net5.0\Bot.Web.Gerenciador.RazorAssemblyInfo.cache
 C:\Bot\BotComControleDePerguntasDinamico\Bot\Bot.Web.Gerenciador\obj\Debug\net5.0\Bot.Web.Gerenciador.RazorAssemblyInfo.cs
 C:\Bot\BotComControleDePerguntasDinamico\Bot\Bot.Web.Gerenciador\obj\Debug\net5.0\staticwebassets\Bot.Web.Gerenciador.StaticWebAssets.Manifest.cache
-C:\Bot\BotComControleDePerguntasDinamico\Bot\Bot.Web.Gerenciador\obj\Debug\net5.0\staticwebassets\Bot.Web.Gerenciador.StaticWebAssets.xml
 C:\Bot\BotComControleDePerguntasDinamico\Bot\Bot.Web.Gerenciador\obj\Debug\net5.0\scopedcss\bundle\Bot.Web.Gerenciador.styles.css
 C:\Bot\BotComControleDePerguntasDinamico\Bot\Bot.Web.Gerenciador\obj\Debug\net5.0\Bot.Web.Gerenciador.TagHelpers.input.cache
 C:\Bot\BotComControleDePerguntasDinamico\Bot\Bot.Web.Gerenciador\obj\Debug\net5.0\Bot.Web.Gerenciador.TagHelpers.output.cache

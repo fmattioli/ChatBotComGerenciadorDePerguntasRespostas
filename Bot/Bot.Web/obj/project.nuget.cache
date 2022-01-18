@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2AyV6yPUGgiw3NrHyLJu6vyIepEmERc4fmVbZdtnzc+19vW5vubbbMtkumzhcHuomXrHA3fgBAzKN141qIHNxg==",
+  "dgSpecHash": "1oGfvg/O1pv6FT+ppGC0cE9RGfbI99TrOr4QwCgCIdpAwIOYfIMgy7O/wVeP4J3fhloNuNdfyrGLpW0IzHZRWQ==",
   "success": true,
   "projectFilePath": "C:\\Bot\\BotComControleDePerguntasDinamico\\Bot\\Bot.Web\\Bot.Web.csproj",
   "expectedPackageFiles": [
@@ -162,11 +162,7 @@
     "C:\\Users\\felipe.santos\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\felipe.santos\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\felipe.santos\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.12\\microsoft.netcore.app.host.win-x64.5.0.12.nupkg.sha512",
-    "C:\\Users\\felipe.santos\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
-    "C:\\Users\\felipe.santos\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
-    "C:\\Users\\felipe.santos\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512"
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }
